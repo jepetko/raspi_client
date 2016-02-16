@@ -1,0 +1,3 @@
+- Dir.glob(File.expand_path(File.join('..', '*.html.haml'), __FILE__)).each do |f|
+  - name = File.basename(f, '.html.haml')
+  = link_to name.titleize, action: name unless name == 'index'

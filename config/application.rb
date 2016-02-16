@@ -11,5 +11,15 @@ module RaspiClient
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    config.encoding = "utf-8"
+    config.filter_parameters += [:password]
+    config.active_support.escape_html_entities_in_json = true
+
+    config.assets.enabled = true
+    config.generators do |g|
+      g.orm :active_record
+      g.template_engine :haml
+    end
   end
 end
