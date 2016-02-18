@@ -1,0 +1,5 @@
+<div>
+    <input ng-model="name">
+    <button ng-click="ctrl.addName(name)">Add name</button>
+    <ul><li ng-repeat="n in names track by $index">{{n}}</li></ul>
+</div>

@@ -1,0 +1,20 @@
+{
+  "name": "raspi_client-js",
+  "version": "0.0.1",
+  "description": "Raspi Client",
+  "author": "Katarina Golbang",
+  "license": "MIT",
+  "homepage": "https://github.com/jepetko/raspi_client",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jepetko/raspi_client.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "2.11.0"
+  },
+  "keywords": [
+    "typescript"
+  ]
+}

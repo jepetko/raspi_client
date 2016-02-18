@@ -1,1 +1,8 @@
-here comes code
+.btn-group-vertical(role="group" aria-label="code specific menu")
+  %button(type="button" class="btn btn-default")
+    %span.glyphicon.glyphicon-play
+  - 3.times do
+    %button(type="button" class="btn btn-default")
+      %span.glyphicon.glyphicon-question-sign
+.div(data-names)
+.div(data-code-editor-directive)

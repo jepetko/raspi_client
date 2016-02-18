@@ -1,0 +1,22 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand RaspiClient
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li.dropdown
+          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+            Account
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              %a(href="#") Personal data
+            %li
+              %a(href="#") Billing
+            %li
+              %a(href="#") Logout

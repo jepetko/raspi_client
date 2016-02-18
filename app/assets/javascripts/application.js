@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require angular/angular
+//= require angular-rails-templates
+//= require bootstrap-sass-official/assets/javascripts/bootstrap.min
+//= require_tree ./app
+//= require_tree ./templates
