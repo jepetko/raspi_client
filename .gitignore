@@ -22,3 +22,10 @@
 .idea/*
 node_modules
 bower_components
+
+# ignore *.js and *.map.js
+app/assets/typescripts/**/*.js
+app/assets/typescripts/**/*.js.map
+
+#ignore karma tests
+karma/*
