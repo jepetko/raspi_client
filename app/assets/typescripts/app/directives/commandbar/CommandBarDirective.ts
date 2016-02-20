@@ -1,6 +1,6 @@
 /// <reference path="../../references.ts"/>
 
-module raspi.directives {
+module raspi.directives.commandbar   {
 
     import ISnippetsResource = raspi.services.ISnippetsResource;
 

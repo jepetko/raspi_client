@@ -11,16 +11,23 @@ module raspi.karma {
     beforeEach(inject(function($injector) {
         var $rootScope: ng.IScope = $injector.get("$rootScope");
         var $compile: ng.ICompileService = $injector.get("$compile");
-        scope = <raspi.directives.codeeditor.ICodeEditorScope>$rootScope.$new();
-        codeEditor= $compile("<code-editor></code-editor>")(scope);
+        codeEditor = $compile("<code-editor></code-editor>")($rootScope.$new());
+        scope = <raspi.directives.codeeditor.ICodeEditorScope>codeEditor.scope();
         scope.$digest();
     }));
 
     describe("CodeEditorDirective", function() {
+
+        it("renders the given code", function() {
+            scope.value = { code: "a = 1" };
+            scope.$digest();
+            expect(codeEditor.find("textarea").val()).toEqual("a = 1");
+        });
+
         it("sets the code on scope", function() {
             var code:string = "2.times { |i| puts i }";
-            codeEditor.find("textarea").val(code);
-            expect(scope.code).toEqual(code);
+            codeEditor.find("textarea").val(code).trigger("input");
+            expect(scope.value.code).toEqual(code);
         });
     });
 

@@ -2,7 +2,7 @@
 
 module raspi.karma {
 
-    var commandBar: ng.IAugmentedJQuery, scope: raspi.directives.ICommandbarScope;
+    var commandBar: ng.IAugmentedJQuery, scope: raspi.directives.commandbar.ICommandbarScope;
 
     beforeEach(function() {
         raspi.karma.module("app");
@@ -11,7 +11,7 @@ module raspi.karma {
     beforeEach(inject(function($injector) {
         var $rootScope: ng.IScope = $injector.get("$rootScope");
         var $compile: ng.ICompileService = $injector.get("$compile");
-        scope = <raspi.directives.ICommandbarScope>$rootScope.$new();
+        scope = <raspi.directives.commandbar.ICommandbarScope>$rootScope.$new();
         commandBar = $compile("<command-bar></command-bar>")(scope);
         scope.$digest();
     }));
