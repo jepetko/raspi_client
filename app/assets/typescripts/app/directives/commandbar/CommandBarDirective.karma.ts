@@ -33,7 +33,7 @@ module raspi.karma {
         }));
 
         it("saves the snippet", function() {
-            var playBtn = commandBar.find(".glyphicon-play")[0];
+            var playBtn = commandBar.find(".glyphicon-play");
             playBtn.click();
             $httpBackend.flush();
         });
