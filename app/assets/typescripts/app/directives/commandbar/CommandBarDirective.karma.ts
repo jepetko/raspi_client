@@ -28,7 +28,7 @@ module raspi.karma {
 
         beforeEach(inject(function(_$httpBackend_) {
             $httpBackend = _$httpBackend_;
-            $httpBackend.whenPOST("snippets").respond({
+            $httpBackend.whenPOST("http://localhost:9292/snippets", {code: 'puts "hello"'}).respond({
             });
         }));
 

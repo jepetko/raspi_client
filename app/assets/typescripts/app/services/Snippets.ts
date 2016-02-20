@@ -8,10 +8,11 @@ module raspi.services {
 
     export interface ISnippetsResource extends ng.resource.IResourceClass<ISnippet> {
         save(): ISnippet;
+        save(data: Object): ISnippet;
     }
 
-    app.factory("Snippets", ["$resource", function($resource: ng.resource.IResourceService): ISnippetsResource {
-        return <ISnippetsResource> $resource("snippets/:id");
+    app.factory("Snippets", ["$resource", "RaspiEndpoint", function($resource: ng.resource.IResourceService, RaspiEndpoint: any): ISnippetsResource {
+        return <ISnippetsResource> $resource(`${RaspiEndpoint.protocol}:\/\/${RaspiEndpoint.host}\:${RaspiEndpoint.port}\/snippets/:id`);
     }]);
 
 }

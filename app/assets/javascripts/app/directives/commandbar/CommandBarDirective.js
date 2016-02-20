@@ -12,7 +12,7 @@ var raspi;
                 this.templateUrl = "app/directives/commandbar/commandbar.html";
                 this.link = function (scope, element, attrs) {
                     scope.save = function () {
-                        _this.Snippets.save();
+                        _this.Snippets.save({ code: 'puts "hello"' });
                     };
                 };
             }

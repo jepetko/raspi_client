@@ -3,5 +3,6 @@
 
 /// <reference path="app.ts"/>
 
+/// <reference path="values/RaspiEndpoint.ts"/>
 /// <reference path="services/Snippets.ts"/>
 /// <reference path="directives/commandbar/CommandBarDirective.ts"/>

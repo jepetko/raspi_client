@@ -19,7 +19,7 @@ module raspi.directives {
 
         link: ng.IDirectiveLinkFn = (scope: ICommandbarScope, element: JQuery, attrs: ng.IAttributes) => {
             scope.save = () => {
-                this.Snippets.save();
+                this.Snippets.save({code: 'puts "hello"'});
             }
         }
     }
