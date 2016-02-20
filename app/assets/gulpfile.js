@@ -9,9 +9,11 @@ var Server = require('karma').Server;
  * Omit karma files!
  */
 gulp.task('typescripts', function () {
-    return gulp.src('typescripts/**/*[!\.karma].ts')
+    return gulp.src(['typescripts/**/*.ts', '!typescripts/**/*.karma.ts'])
         .pipe(ts({
-            noImplicitAny: false
+            noImplicitAny: false,
+            //troubles in the browser, fix this later
+            target: 'ES5'
         }))
         .pipe(gulp.dest('javascripts'));
 });
@@ -31,7 +33,9 @@ gulp.task('copy-templates', function() {
 gulp.task('karma-typescripts', function() {
     return gulp.src('typescripts/**/*.ts')
         .pipe(ts({
-            noImplicitAny: false
+            noImplicitAny: false,
+            //TODO: karma seems to have troubles with ES6
+            target: 'ES5'
         }))
         .pipe(gulp.dest('../../karma'));
 });
@@ -55,9 +59,7 @@ gulp.task('karma-tests', ['typescripts', 'karma-typescripts', 'create-template-c
     return new Server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
-    }, function() {
-        done();
-    }).start();
+    }, done).start();
 });
 
 /**
