@@ -2,16 +2,16 @@
 
 module raspi.karma {
 
-    var commandBar: ng.IAugmentedJQuery, scope: ng.IScope;
+    var commandBar: ng.IAugmentedJQuery, scope: raspi.directives.ICommandbarScope;
 
     beforeEach(function() {
-        angular.mock.module("app");
+        raspi.karma.module("app");
     });
 
     beforeEach(inject(function($injector) {
         var $rootScope: ng.IScope = $injector.get("$rootScope");
         var $compile: ng.ICompileService = $injector.get("$compile");
-        scope = $rootScope.$new();
+        scope = <raspi.directives.ICommandbarScope>$rootScope.$new();
         commandBar = $compile("<command-bar></command-bar>")(scope);
         scope.$digest();
     }));
@@ -33,6 +33,7 @@ module raspi.karma {
         }));
 
         it("saves the snippet", function() {
+            scope.code = 'puts "hello"';
             var playBtn = commandBar.find(".glyphicon-play");
             playBtn.click();
             $httpBackend.flush();

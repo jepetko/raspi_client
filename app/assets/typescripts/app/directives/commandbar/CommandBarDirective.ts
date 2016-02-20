@@ -4,8 +4,9 @@ module raspi.directives {
 
     import ISnippetsResource = raspi.services.ISnippetsResource;
 
-    interface ICommandbarScope extends ng.IScope {
-        save(): void;
+    export interface ICommandbarScope extends ng.IScope {
+        code: string;
+        save();
     }
 
     class CommandbarDirective implements ng.IDirective {
@@ -19,7 +20,7 @@ module raspi.directives {
 
         link: ng.IDirectiveLinkFn = (scope: ICommandbarScope, element: JQuery, attrs: ng.IAttributes) => {
             scope.save = () => {
-                this.Snippets.save({code: 'puts "hello"'});
+                this.Snippets.save({code: scope.code});
             }
         }
     }
