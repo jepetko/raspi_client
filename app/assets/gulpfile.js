@@ -58,7 +58,7 @@ gulp.task('create-template-cache', function () {
 gulp.task('karma-tests', ['typescripts', 'karma-typescripts', 'create-template-cache'], function (done) {
     return new Server({
         configFile: __dirname + '/karma.conf.js',
-        singleRun: false
+        singleRun: true
     }, done).start();
 });
 

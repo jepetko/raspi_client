@@ -20,10 +20,6 @@ module raspi.directives.common {
                         valid = parseInt(newValue) < 65536;
                     }
                     ngModelCtrl.$setValidity('between', valid);
-                    if (!valid) {
-                        ngModelCtrl.$setViewValue("");
-                        ngModelCtrl.$render();
-                    }
                 });
             }
         }

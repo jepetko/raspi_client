@@ -19,7 +19,7 @@ module raspi.karma {
         formCtrl = <ng.IFormController>endpointForm.scope()["endpointform"];
     }));
 
-    describe("endpoint form validations", function () {
+    describe("endpoint form validation", function () {
 
         it("validates the presence of the protocol", function() {
             scope.endpoint = {
@@ -64,7 +64,7 @@ module raspi.karma {
             expect(modelCtrl.$error["between"]).toBeDefined();
         });
 
-        it("validates the value of the port (between 1 and 65535) and rejects invalid values", function() {
+        it("set the port invalid if the value is not between 1 and 65535)", function() {
             scope.endpoint = {
                 protocol: 'http',
                 host: 'localhost',
@@ -74,11 +74,9 @@ module raspi.karma {
 
             var modelCtrl:ng.INgModelController = <ng.INgModelController>formCtrl["port"];
             expect(modelCtrl.$error["between"]).toBeDefined();
-
-            expect(endpointForm.find('[name="port"]').val()).toEqual("");
         });
 
-        it("it rejects alpha numeric values for the port", function() {
+        it("set the port invalid if the value is alpha numeric", function() {
             scope.endpoint = {
                 protocol: 'https',
                 host: 'localhost',
@@ -88,7 +86,8 @@ module raspi.karma {
             angular.merge(scope.endpoint, {port: 'a123'});
             scope.$digest();
 
-            expect(endpointForm.find('[name="port"]').val()).toEqual("");
+            var modelCtrl:ng.INgModelController = <ng.INgModelController>formCtrl["port"];
+            expect(modelCtrl.$error["between"]).toBeDefined();
         });
 
         it("allows numeric values for the port", function() {
@@ -99,7 +98,13 @@ module raspi.karma {
             };
             scope.$digest();
 
+            var modelCtrl:ng.INgModelController = <ng.INgModelController>formCtrl["port"];
+            expect(modelCtrl.$error["between"]).toBeUndefined();
             expect(endpointForm.find('[name="port"]').val()).toEqual("123");
         });
+    });
+
+    describe("save()", function() {
+        it("performs a REST call");
     });
 }
