@@ -16,6 +16,7 @@ var raspi;
                     this.require = "form";
                     this.link = function (scope, element, attrs, formCtrl) {
                         scope.endpoint = angular.copy(_this.raspiEndpoint, {});
+                        scope.orig = _this.raspiEndpoint;
                         scope.save = function () {
                             if (formCtrl.$invalid) {
                                 return;
@@ -23,7 +24,7 @@ var raspi;
                             angular.merge(_this.raspiEndpoint, scope.endpoint);
                         };
                         scope.reset = function () {
-                            console.info("orig", _this.raspiEndpoint);
+                            _this.raspiEndpoint.reset();
                             scope.endpoint = angular.copy(_this.raspiEndpoint, {});
                         };
                     };

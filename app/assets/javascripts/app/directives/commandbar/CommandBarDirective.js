@@ -14,7 +14,7 @@ var raspi;
                     this.templateUrl = "app/directives/commandbar/commandbar.html";
                     this.link = function (scope, element, attrs) {
                         scope.save = function () {
-                            _this.Snippets.save({ code: scope.code });
+                            _this.Snippets.createResource().save({ code: scope.code });
                         };
                     };
                 }

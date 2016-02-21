@@ -5,6 +5,7 @@ module raspi.directives.endpointform {
     import IRaspiEndpoint = raspi.values.IRaspiEndpoint;
 
     export interface IEndpointFormScope extends ng.IScope {
+        orig: IRaspiEndpoint;
         endpoint: IRaspiEndpoint;
         save();
         reset();
@@ -22,6 +23,7 @@ module raspi.directives.endpointform {
 
         link: ng.IDirectiveLinkFn = (scope: IEndpointFormScope, element: JQuery, attrs: ng.IAttributes, formCtrl: ng.IFormController) => {
             scope.endpoint = <IRaspiEndpoint>angular.copy(this.raspiEndpoint, {});
+            scope.orig = this.raspiEndpoint;
             scope.save = () => {
                 if(formCtrl.$invalid) {
                     return;
@@ -29,7 +31,7 @@ module raspi.directives.endpointform {
                 angular.merge(this.raspiEndpoint, scope.endpoint);
             }
             scope.reset = () => {
-                console.info("orig", this.raspiEndpoint);
+                this.raspiEndpoint.reset();
                 scope.endpoint = <IRaspiEndpoint>angular.copy(this.raspiEndpoint, {});
             }
         }
