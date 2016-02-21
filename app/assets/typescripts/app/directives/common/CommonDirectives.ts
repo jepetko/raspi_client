@@ -24,4 +24,22 @@ module raspi.directives.common {
             }
         }
     });
+
+    app.directive("dialog", ["$parse", <ng.IDirectiveFactory>function($parse: ng.IParseService) {
+
+        interface IDialogScope extends ng.IScope {
+            title: string;
+        }
+
+        return <ng.IDirective>{
+            strict: "E",
+            templateUrl: "app/directives/common/dialog.html",
+            transclude: true,
+            replace: true,
+            link: function(scope: IDialogScope, element: JQuery, attrs: ng.IAttributes) {
+
+                scope.title = $parse(attrs["title"])(scope);
+            }
+        }
+    }]);
 }

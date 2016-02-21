@@ -27,6 +27,17 @@ var raspi;
                     }
                 };
             });
+            raspi.app.directive("dialog", ["$parse", function ($parse) {
+                    return {
+                        strict: "E",
+                        templateUrl: "app/directives/common/dialog.html",
+                        transclude: true,
+                        replace: true,
+                        link: function (scope, element, attrs) {
+                            scope.title = $parse(attrs["title"])(scope);
+                        }
+                    };
+                }]);
         })(common = directives.common || (directives.common = {}));
     })(directives = raspi.directives || (raspi.directives = {}));
 })(raspi || (raspi = {}));
