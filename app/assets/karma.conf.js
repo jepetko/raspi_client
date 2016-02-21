@@ -2,7 +2,8 @@ module.exports = function (config) {
     config.set({
         frameworks: ['jasmine'],
         reporters: ['spec'],
-        browsers: ['PhantomJS'],
+        //browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
         files: [
             '../../vendor/assets/bower_components/jquery/dist/jquery.js',
             '../../vendor/assets/bower_components/angular/angular.js',
