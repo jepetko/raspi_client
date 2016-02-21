@@ -2,15 +2,29 @@
 
 module raspi.values {
 
+    export const RASPI_DEFAULT_PROTOCOL: string = "http";
+    export const RASPI_DEFAULT_HOST: string = "192.168.0.100";
+    export const RASPI_DEFAULT_PORT: number = 9292;
+    export const RASPI_DEFAULT_SECRET: string = "123";
+
     export interface IRaspiEndpoint {
         protocol: string;
         host: string;
         port: number;
+        secret: string;
+        reset?();
     }
 
     app.value("RaspiEndpoint", <IRaspiEndpoint>{
-        protocol: "http",
-        host: "localhost",
-        port: 9292
+        protocol: RASPI_DEFAULT_PROTOCOL,
+        host: RASPI_DEFAULT_HOST,
+        port: RASPI_DEFAULT_PORT,
+        secret: RASPI_DEFAULT_SECRET,
+        reset: function() {
+            this.protocol = RASPI_DEFAULT_PROTOCOL;
+            this.host = RASPI_DEFAULT_HOST
+            this.port = RASPI_DEFAULT_PORT;
+            this.secret = RASPI_DEFAULT_SECRET;
+        }
     });
 }

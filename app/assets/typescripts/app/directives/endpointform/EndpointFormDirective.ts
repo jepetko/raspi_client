@@ -3,9 +3,11 @@
 module raspi.directives.endpointform {
 
     import IRaspiEndpoint = raspi.values.IRaspiEndpoint;
+
     export interface IEndpointFormScope extends ng.IScope {
         endpoint: IRaspiEndpoint;
         save();
+        reset();
     }
 
     class EndpointFormDirective implements ng.IDirective {
@@ -15,11 +17,24 @@ module raspi.directives.endpointform {
         templateUrl: string = "app/directives/endpointform/endpointform.html";
         require: string = "form";
 
-        link: ng.IDirectiveLinkFn = (scope: IEndpointFormScope, element: JQuery, attrs: ng.IAttributes, formCtrl: ng.IFormController) => {
+        constructor(private raspiEndpoint: IRaspiEndpoint) {
+        }
 
+        link: ng.IDirectiveLinkFn = (scope: IEndpointFormScope, element: JQuery, attrs: ng.IAttributes, formCtrl: ng.IFormController) => {
+            scope.endpoint = <IRaspiEndpoint>angular.copy(this.raspiEndpoint, {});
+            scope.save = () => {
+                if(formCtrl.$invalid) {
+                    return;
+                }
+                angular.merge(this.raspiEndpoint, scope.endpoint);
+            }
+            scope.reset = () => {
+                console.info("orig", this.raspiEndpoint);
+                scope.endpoint = <IRaspiEndpoint>angular.copy(this.raspiEndpoint, {});
+            }
         }
     }
 
-    app.directive("endpointForm", [() => {return new EndpointFormDirective();}]);
+    app.directive("endpointForm", ["RaspiEndpoint", (RaspiEndpoint: IRaspiEndpoint) => {return new EndpointFormDirective(RaspiEndpoint);}]);
 
 }

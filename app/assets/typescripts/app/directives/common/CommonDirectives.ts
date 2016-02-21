@@ -37,7 +37,6 @@ module raspi.directives.common {
             transclude: true,
             replace: true,
             link: function(scope: IDialogScope, element: JQuery, attrs: ng.IAttributes) {
-
                 scope.title = $parse(attrs["title"])(scope);
             }
         }

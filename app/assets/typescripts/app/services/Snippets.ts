@@ -2,8 +2,6 @@
 
 module raspi.services {
 
-    import IRaspiEndpoint = raspi.values.IRaspiEndpoint;
-
     interface ISnippet extends ng.resource.IResource<ISnippet> {
         code: string;
     }
@@ -13,8 +11,10 @@ module raspi.services {
         save(data: Object): ISnippet;
     }
 
-    app.factory("Snippets", ["$resource", "RaspiEndpoint", function($resource: ng.resource.IResourceService, RaspiEndpoint: IRaspiEndpoint): ISnippetsResource {
-        return <ISnippetsResource> $resource(`${RaspiEndpoint.protocol}:\/\/${RaspiEndpoint.host}\:${RaspiEndpoint.port}\/snippets/:id`);
+    app.factory("Snippets", ["$resource", "RaspiEndpoint", function($resource: ng.resource.IResourceService, RaspiEndpoint: raspi.values.IRaspiEndpoint): ISnippetsResource {
+        var restUrl: string = `${RaspiEndpoint.protocol}:\/\/${RaspiEndpoint.host}\:${RaspiEndpoint.port}\/snippets/:id`;
+        var options = {header: {secret: RaspiEndpoint.secret}};
+        return <ISnippetsResource> $resource(restUrl, {}, options);
     }]);
 
 }
