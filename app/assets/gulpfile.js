@@ -66,7 +66,8 @@ gulp.task('karma-tests', ['typescripts', 'karma-typescripts', 'create-template-c
  * execute "typescripts" task if a file changes
  */
 gulp.task('watch', function() {
-    gulp.watch('**/*.ts', ['karma-tests']);
+    gulp.watch('**/*.ts', ['typescripts']);
+    gulp.watch('**/*.html', ['copy-templates']);
 });
 
 gulp.task('default', ['karma-tests']);

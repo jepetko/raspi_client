@@ -17,3 +17,12 @@ $icon-font-path: "bootstrap-sass-official/assets/fonts/bootstrap/";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 
+form {
+  div.error {
+    color: $brand-danger;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+}
