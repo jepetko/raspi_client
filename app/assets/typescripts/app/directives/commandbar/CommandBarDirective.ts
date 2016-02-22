@@ -3,7 +3,7 @@
 module raspi.directives.commandbar   {
 
     import ISnippetsResource = raspi.services.ISnippetsResource;
-    import IConfigurableSnippetsResource = raspi.services.IConfigurableSnippetsResource;
+    import IResourceFactoryMethod = raspi.services.IResourceFactoryMethod;
 
     export interface ICommandbarScope extends ng.IScope {
         code: string;
@@ -16,7 +16,7 @@ module raspi.directives.commandbar   {
         scope: boolean = true;
         templateUrl: string = "app/directives/commandbar/commandbar.html";
 
-        constructor(private Snippets: IConfigurableSnippetsResource) {
+        constructor(private Snippets: IResourceFactoryMethod<ISnippetsResource>) {
         }
 
         link: ng.IDirectiveLinkFn = (scope: ICommandbarScope, element: JQuery, attrs: ng.IAttributes) => {
@@ -26,5 +26,5 @@ module raspi.directives.commandbar   {
         }
     }
 
-    app.directive("commandBar", ["Snippets", (Snippets: IConfigurableSnippetsResource) => { return new CommandbarDirective(Snippets);}]);
+    app.directive("commandBar", ["Snippets", (SnippetsFactoryMethod: IResourceFactoryMethod<ISnippetsResource>) => { return new CommandbarDirective(SnippetsFactoryMethod);}]);
 }

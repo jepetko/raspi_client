@@ -20,7 +20,7 @@ var raspi;
                 }
                 return CommandbarDirective;
             })();
-            raspi.app.directive("commandBar", ["Snippets", function (Snippets) { return new CommandbarDirective(Snippets); }]);
+            raspi.app.directive("commandBar", ["Snippets", function (SnippetsFactoryMethod) { return new CommandbarDirective(SnippetsFactoryMethod); }]);
         })(commandbar = directives.commandbar || (directives.commandbar = {}));
     })(directives = raspi.directives || (raspi.directives = {}));
 })(raspi || (raspi = {}));

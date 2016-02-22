@@ -5,10 +5,14 @@ var raspi;
     (function (services) {
         raspi.app.factory("Snippets", ["$resource", "RaspiEndpoint", function ($resource, RaspiEndpoint) {
                 return {
+                    url: function () {
+                        return RaspiEndpoint.protocol + "://" + RaspiEndpoint.host + ":" + RaspiEndpoint.port + "/snippets/:id";
+                    },
+                    options: function () {
+                        return { header: { secret: RaspiEndpoint.secret } };
+                    },
                     createResource: function () {
-                        var restUrl = RaspiEndpoint.protocol + "://" + RaspiEndpoint.host + ":" + RaspiEndpoint.port + "/snippets/:id";
-                        var options = { header: { secret: RaspiEndpoint.secret } };
-                        return $resource(restUrl, {}, options);
+                        return $resource(this.url(), {}, this.options());
                     }
                 };
             }]);
