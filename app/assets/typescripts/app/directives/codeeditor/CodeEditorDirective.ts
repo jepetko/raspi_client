@@ -2,22 +2,20 @@
 
 module raspi.directives.codeeditor {
 
-    interface IValue {
-        code: string;
-    }
-
     export interface ICodeEditorScope extends ng.IScope {
-        value: IValue;
+        code: string;
     }
 
     class CodeEditorDirective implements ng.IDirective {
 
         restrict = "E";
-        scope = true;
+        replace = true;
+        scope = {
+            code: "="
+        };
         templateUrl = "app/directives/codeeditor/codeeditor.html";
 
         link: ng.IDirectiveLinkFn = (scope: ICodeEditorScope, element: JQuery, attrs: ng.IAttributes) => {
-            scope.value = {code: ""};
         }
     }
 

@@ -4,7 +4,7 @@ var raspi;
     var values;
     (function (values) {
         values.RASPI_DEFAULT_PROTOCOL = "http";
-        values.RASPI_DEFAULT_HOST = "192.168.0.100";
+        values.RASPI_DEFAULT_HOST = "localhost";
         values.RASPI_DEFAULT_PORT = 9292;
         values.RASPI_DEFAULT_SECRET = "123";
         raspi.app.value("RaspiEndpoint", {

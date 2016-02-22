@@ -5,20 +5,19 @@ var raspi;
     (function (directives) {
         var codeeditor;
         (function (codeeditor) {
-            var CodeEditorDirective = (function () {
-                function CodeEditorDirective() {
+            var WrapperDirective = (function () {
+                function WrapperDirective() {
                     this.restrict = "E";
+                    this.scope = true;
                     this.replace = true;
-                    this.scope = {
-                        code: "="
-                    };
-                    this.templateUrl = "app/directives/codeeditor/codeeditor.html";
+                    this.templateUrl = "app/directives/codeeditor/wrapper.html";
                     this.link = function (scope, element, attrs) {
+                        scope.model = { code: "" };
                     };
                 }
-                return CodeEditorDirective;
+                return WrapperDirective;
             })();
-            raspi.app.directive("codeEditor", [function () { return new CodeEditorDirective(); }]);
+            raspi.app.directive("codeEditorWrapper", [function () { return new WrapperDirective(); }]);
         })(codeeditor = directives.codeeditor || (directives.codeeditor = {}));
     })(directives = raspi.directives || (raspi.directives = {}));
 })(raspi || (raspi = {}));

@@ -2,17 +2,19 @@
 
 module raspi.karma {
 
-    var commandBar: ng.IAugmentedJQuery, scope: raspi.directives.commandbar.ICommandbarScope;
+    var commandBar: ng.IAugmentedJQuery,
+        $rootScope: ng.IScope,
+        scope: raspi.directives.commandbar.ICommandbarScope;
 
     beforeEach(function() {
         raspi.karma.module("app");
     });
 
     beforeEach(inject(function($injector) {
-        var $rootScope: ng.IScope = $injector.get("$rootScope");
+        $rootScope = $injector.get("$rootScope");
         var $compile: ng.ICompileService = $injector.get("$compile");
-        scope = <raspi.directives.commandbar.ICommandbarScope>$rootScope.$new();
-        commandBar = $compile("<command-bar></command-bar>")(scope);
+        commandBar = $compile("<command-bar code='{{model.code}}'></command-bar>")($rootScope);
+        scope = <raspi.directives.commandbar.ICommandbarScope>commandBar.scope();
         scope.$digest();
     }));
 
@@ -28,12 +30,14 @@ module raspi.karma {
 
         beforeEach(inject(function(_$httpBackend_) {
             $httpBackend = _$httpBackend_;
-            $httpBackend.whenPOST("http://192.168.0.100:9292/snippets", {code: 'puts "hello"'}).respond({
+            $httpBackend.whenPOST("http://localhost:9292/snippets", {code: 'puts "hello"'}).respond({
             });
         }));
 
         it("saves the snippet", function() {
-            scope.code = 'puts "hello"';
+            $rootScope["model"] = { code: 'puts "hello"' };
+            $rootScope.$digest();
+
             var playBtn = commandBar.find(".glyphicon-play");
             playBtn.click();
             $httpBackend.flush();

@@ -8,11 +8,11 @@ var raspi;
                     url: function () {
                         return RaspiEndpoint.protocol + "://" + RaspiEndpoint.host + ":" + RaspiEndpoint.port + "/snippets/:id";
                     },
-                    options: function () {
-                        return { header: { secret: RaspiEndpoint.secret } };
+                    headers: function () {
+                        return { API_KEY: RaspiEndpoint.secret };
                     },
                     createResource: function () {
-                        return $resource(this.url(), {}, this.options());
+                        return $resource(this.url(), {}, { save: { method: 'POST', headers: this.headers() } });
                     }
                 };
             }]);
