@@ -3,7 +3,7 @@
 module raspi.values {
 
     export const RASPI_DEFAULT_PROTOCOL: string = "http";
-    export const RASPI_DEFAULT_HOST: string = "192.168.0.100";
+    export const RASPI_DEFAULT_HOST: string = "localhost";
     export const RASPI_DEFAULT_PORT: number = 9292;
     export const RASPI_DEFAULT_SECRET: string = "123";
 
