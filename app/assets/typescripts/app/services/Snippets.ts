@@ -14,11 +14,11 @@ module raspi.services {
             url(): string {
                 return `${RaspiEndpoint.protocol}:\/\/${RaspiEndpoint.host}\:${RaspiEndpoint.port}\/snippets/:id`;
             },
-            options() {
-                return {header: {secret: RaspiEndpoint.secret}};
+            headers() {
+                return {API_KEY: RaspiEndpoint.secret};
             },
             createResource(): ISnippetsResource {
-                return <ISnippetsResource> $resource(this.url(), {}, this.options());
+                return <ISnippetsResource> $resource(this.url(), {}, {save: {method: 'POST', headers: this.headers()}});
             }
         };
     }]);
