@@ -1,3 +1,9 @@
-<div>
-    <textarea ng-model="code"></textarea>
+<div ui-ace="{
+  useWrapMode : true,
+  showGutter: false,
+  theme:'clouds_midnight',
+  mode: 'ruby',
+  firstLineNumber: 5,
+  onLoad: on
+}" ng-model="code" class="ace">
 </div>

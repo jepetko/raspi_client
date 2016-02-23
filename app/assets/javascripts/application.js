@@ -16,4 +16,8 @@
 //= require angular-resource/angular-resource
 //= require angular-rails-templates
 //= require bootstrap-sass-official/assets/javascripts/bootstrap.min
+//= require ace-builds/src-noconflict/ace
+//= require ace-builds/src-noconflict/theme-clouds_midnight
+//= require ace-builds/src-noconflict/mode-ruby
+//= require angular-ui-ace/ui-ace
 //= require_tree ./app

@@ -12,7 +12,7 @@ var raspi;
                     this.replace = true;
                     this.templateUrl = "app/directives/codeeditor/wrapper.html";
                     this.link = function (scope, element, attrs) {
-                        scope.model = { code: "" };
+                        scope.model = { code: "default" };
                     };
                 }
                 return WrapperDirective;
