@@ -17,6 +17,7 @@ var raspi;
                     this.link = function (scope, element, attrs, formCtrl) {
                         scope.endpoint = angular.copy(_this.raspiEndpoint, {});
                         scope.orig = _this.raspiEndpoint;
+                        scope.endpointForm = formCtrl;
                         scope.save = function () {
                             if (formCtrl.$invalid) {
                                 return;

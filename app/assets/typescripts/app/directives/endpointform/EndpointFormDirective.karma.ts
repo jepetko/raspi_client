@@ -16,7 +16,7 @@ module raspi.karma {
         scope = <raspi.directives.endpointform.IEndpointFormScope>endpointForm.scope();
         scope.$digest();
         //here the name of the form is referenced
-        formCtrl = <ng.IFormController>endpointForm.scope()["endpointform"];
+        formCtrl = <ng.IFormController>scope.endpointForm;
 
         raspiEndpoint = $injector.get("RaspiEndpoint");
     }));
