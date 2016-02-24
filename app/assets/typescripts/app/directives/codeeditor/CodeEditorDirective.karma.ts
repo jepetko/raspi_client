@@ -4,7 +4,8 @@ module raspi.karma {
 
     var codeEditor: ng.IAugmentedJQuery,
         $rootScope: ng.IScope,
-        scope: raspi.directives.codeeditor.ICodeEditorScope;
+        scope: raspi.directives.codeeditor.ICodeEditorScope,
+        aceEditor: any;
 
     beforeEach(function() {
         raspi.karma.module("app");
@@ -16,6 +17,7 @@ module raspi.karma {
         codeEditor = $compile('<code-editor code="model.code"></code-editor>')($rootScope);
         scope = <raspi.directives.codeeditor.ICodeEditorScope>codeEditor.scope();
         scope.$digest();
+        aceEditor = window["ace"]["edit"](codeEditor[0]);
     }));
 
     describe("CodeEditorDirective", function() {
@@ -23,23 +25,20 @@ module raspi.karma {
         it("renders the given code", function() {
             $rootScope["model"] = { code: "a = 1"}
             $rootScope.$digest();
-            //TODO: check why this doesn't match
-            //expect(codeEditor.find('.ace_content').text()).toEqual("a = 1");
+            expect(aceEditor.getSession().getValue()).toEqual("a = 1");
         });
 
         it("sets the code on the scope", function() {
             $rootScope["model"] = { code: "" };
             $rootScope.$digest();
+
             var code:string = "2.times { |i| puts i }";
 
-            codeEditor.find("textarea").focus();
+            aceEditor.getSession().setValue(code);
+            //start a digest cycle because the value was set outside of the Angular framework
+            $rootScope.$digest();
 
-            var e = angular.element.Event('keypress');
-            e.which = 65;
-            codeEditor.find("textarea").trigger(e);
-
-            //TODO: fix this
-            //expect($rootScope["model"]["code"]).toEqual(code);
+            expect($rootScope["model"]["code"]).toEqual(code);
         });
     });
 
