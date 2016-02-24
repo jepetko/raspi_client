@@ -18,7 +18,7 @@ module raspi.directives.codeeditor {
         templateUrl = "app/directives/codeeditor/wrapper.html";
 
         link: ng.IDirectiveLinkFn = (scope: IWrapperScope, element: JQuery, attrs: ng.IAttributes) => {
-            scope.model = {code: "default"};
+            scope.model = {code: ""};
         }
     }
 
