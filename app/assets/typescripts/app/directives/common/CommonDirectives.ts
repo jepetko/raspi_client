@@ -2,6 +2,11 @@
 
 module raspi.directives.common {
 
+    interface IModal extends JQuery {
+        modal(options: any);
+        modal(action: string);
+    }
+
     app.directive("between", <ng.IDirectiveFactory>function() {
         return <ng.IDirective>{
             strict: "A",
@@ -36,8 +41,16 @@ module raspi.directives.common {
             templateUrl: "app/directives/common/dialog.html",
             transclude: true,
             replace: true,
-            link: function(scope: IDialogScope, element: JQuery, attrs: ng.IAttributes) {
+            link: function(scope: IDialogScope, element: IModal, attrs: ng.IAttributes) {
                 scope.title = $parse(attrs["title"])(scope);
+
+                scope.$on("endpointForm.saved", function() {
+                    element.modal("hide");
+                });
+
+                element.on("hide.bs.modal", function() {
+                    scope.$broadcast("dialog.hide");
+                });
             }
         }
     }]);

@@ -6,28 +6,43 @@ var raspi;
         var endpointform;
         (function (endpointform) {
             var EndpointFormDirective = (function () {
-                function EndpointFormDirective(raspiEndpoint) {
+                function EndpointFormDirective(origRaspiEndpoint) {
                     var _this = this;
-                    this.raspiEndpoint = raspiEndpoint;
+                    this.origRaspiEndpoint = origRaspiEndpoint;
                     this.restrict = "E";
                     this.replace = true;
                     this.scope = true;
                     this.templateUrl = "app/directives/endpointform/endpointform.html";
                     this.require = "form";
                     this.link = function (scope, element, attrs, formCtrl) {
-                        scope.endpoint = angular.copy(_this.raspiEndpoint, {});
-                        scope.orig = _this.raspiEndpoint;
+                        scope.endpoint = angular.copy(_this.origRaspiEndpoint, {});
                         scope.endpointForm = formCtrl;
                         scope.save = function () {
                             if (formCtrl.$invalid) {
                                 return;
                             }
-                            angular.merge(_this.raspiEndpoint, scope.endpoint);
+                            angular.merge(_this.origRaspiEndpoint, scope.endpoint);
+                            scope.$emit('endpointForm.saved');
+                        };
+                        var resetModelCtrl = function (name, value) {
+                            var modelCtrl = formCtrl[name];
+                            modelCtrl.$setViewValue(value);
+                            modelCtrl.$render();
                         };
                         scope.reset = function () {
-                            _this.raspiEndpoint.reset();
-                            scope.endpoint = angular.copy(_this.raspiEndpoint, {});
+                            scope.endpoint = angular.copy(_this.origRaspiEndpoint, {});
+                            resetModelCtrl("protocol", scope.endpoint.protocol);
+                            resetModelCtrl("host", scope.endpoint.host);
+                            resetModelCtrl("port", scope.endpoint.port);
+                            resetModelCtrl("secret", scope.endpoint.secret);
                         };
+                        scope.resetToDefault = function () {
+                            _this.origRaspiEndpoint.reset();
+                            scope.reset();
+                        };
+                        scope.$on("dialog.hide", function () {
+                            scope.reset();
+                        });
                     };
                 }
                 return EndpointFormDirective;

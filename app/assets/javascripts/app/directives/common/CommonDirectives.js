@@ -35,6 +35,12 @@ var raspi;
                         replace: true,
                         link: function (scope, element, attrs) {
                             scope.title = $parse(attrs["title"])(scope);
+                            scope.$on("endpointForm.saved", function () {
+                                element.modal("hide");
+                            });
+                            element.on("hide.bs.modal", function () {
+                                scope.$broadcast("dialog.hide");
+                            });
                         }
                     };
                 }]);
