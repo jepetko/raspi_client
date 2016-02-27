@@ -4,6 +4,8 @@ module raspi.directives.codeeditor {
 
     interface IWrapperModel {
         code: string;
+        exitCode?: number;
+        output?: string;
     }
 
     export interface IWrapperScope extends ng.IScope {

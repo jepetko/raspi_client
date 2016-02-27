@@ -5,7 +5,7 @@ module raspi.directives.commandbar   {
     import ISnippetsResource = raspi.services.ISnippetsResource;
     import IResourceFactoryMethod = raspi.services.IResourceFactoryMethod;
 
-    enum IStatus {
+    export enum IStatus {
         SUCCESS,
         ERROR
     }
@@ -13,14 +13,20 @@ module raspi.directives.commandbar   {
     export interface ICommandbarScope extends ng.IScope {
         code: string;
         status: IStatus;
+        exitCode: number;
+        output: string;
         save();
     }
 
     class CommandbarDirective implements ng.IDirective {
 
         restrict = "E";
+        replace = true;
         scope = {
-            code: "@"
+            code: "@",
+            output: "=",
+            exitCode: "=",
+            status: "="
         };
         templateUrl = "app/directives/commandbar/commandbar.html";
 
@@ -29,10 +35,14 @@ module raspi.directives.commandbar   {
 
         link: ng.IDirectiveLinkFn = (scope: ICommandbarScope, element: JQuery, attrs: ng.IAttributes) => {
             scope.save = () => {
-                this.Snippets.createResource().save({code: scope.code}, () => {
+                this.Snippets.createResource().save({code: scope.code}, (response: any) => {
                     scope.status = IStatus.SUCCESS;
+                    scope.output = response.output;
+                    scope.exitCode = response.exit_code;
                 }, () => {
                     scope.status = IStatus.ERROR;
+                    scope.output = "";
+                    scope.exitCode = -1;
                 });
             }
         }

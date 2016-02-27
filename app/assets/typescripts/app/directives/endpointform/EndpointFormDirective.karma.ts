@@ -96,7 +96,7 @@ module raspi.karma {
             expect(modelCtrl.$error["required"]).toBeDefined();
         });
 
-        it("set the port invalid if the value is not between 1 and 65535)", function() {
+        it("sets the port invalid if the value is not between 1 and 65535)", function() {
             scope.endpoint = {
                 protocol: 'http',
                 host: 'localhost',
@@ -109,7 +109,7 @@ module raspi.karma {
             expect(modelCtrl.$error["between"]).toBeDefined();
         });
 
-        it("set the port invalid if the value is alpha numeric", function() {
+        it("sets the port invalid if the value is alpha numeric", function() {
             scope.endpoint = {
                 protocol: 'https',
                 host: 'localhost',
