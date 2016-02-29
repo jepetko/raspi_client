@@ -17,6 +17,27 @@ $icon-font-path: "bootstrap-sass-official/assets/fonts/bootstrap/";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 
+html, body   {
+  height: 100%;
+
+  &>.container-fluid {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &>.wrapper {
+      height: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      &>.ace {
+        flex: 1;
+      }
+    }
+  }
+}
+
 form {
   div.error {
     color: $brand-danger;
