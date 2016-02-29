@@ -31,8 +31,20 @@ html, body   {
       display: flex;
       flex-direction: column;
 
-      &>.ace {
+      &>.code-wrapper {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        &>.ace {
+          flex: 0.6;
+        }
+
+        &>.result {
+          border: 2px solid #e8e8e8;
+          font-family: Consolas, monospace;
+          flex: 0.4;
+        }
       }
     }
   }
