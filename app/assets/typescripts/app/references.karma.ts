@@ -5,5 +5,6 @@
 /// <reference path="directives/commandbar/CommandBarDirective.karma.ts"/>
 /// <reference path="directives/codeeditor/CodeEditorDirective.karma.ts"/>
 /// <reference path="directives/endpointform/EndpointFormDirective.karma.ts"/>
+/// <reference path="services/HttpInterceptorService.karma.ts"/>
 
 /// <reference path="support.karma.ts"/>
