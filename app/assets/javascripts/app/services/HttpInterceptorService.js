@@ -8,19 +8,24 @@ var raspi;
                 var _this = this;
                 this.$q = $q;
                 this.$rootScope = $rootScope;
-                this.done = 0;
-                this.running = 0;
+                this.state = {
+                    done: 0,
+                    pending: 0
+                };
                 this.request = function (config) {
                     if (!_this.isTemplate(config)) {
                         _this.$rootScope.$broadcast("http.request");
-                        _this.$rootScope.$broadcast("http.state", { running: ++_this.running, done: _this.done });
+                        _this.state.pending++;
+                        _this.$rootScope.$broadcast("http.state", _this.state);
                     }
                     return config;
                 };
                 this.response = function (response) {
                     if (!_this.isTemplate(response.config)) {
                         _this.$rootScope.$broadcast("http.response");
-                        _this.$rootScope.$broadcast("http.state", { running: --_this.running, done: ++_this.done });
+                        _this.state.pending--;
+                        _this.state.done++;
+                        _this.$rootScope.$broadcast("http.state", _this.state);
                     }
                     return response;
                 };

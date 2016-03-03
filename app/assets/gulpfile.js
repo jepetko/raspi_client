@@ -70,4 +70,12 @@ gulp.task('watch', function() {
     gulp.watch('**/*.html', ['copy-templates']);
 });
 
+/**
+ * watch and test
+ */
+gulp.task("watch-and-test", function() {
+    gulp.watch('**/*.ts', ['karma-tests']);
+    gulp.watch('**/*.html', ['karma-tests']);
+})
+
 gulp.task('default', ['karma-tests']);

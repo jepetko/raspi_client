@@ -62,7 +62,7 @@ module raspi.karma {
             }
             $httpBackend.flush(4);
 
-            expect(eventHandler.handle).toHaveBeenCalledWith(jasmine.objectContaining({name: "http.state"}), {running: 1, done: 4});
+            expect(eventHandler.handle).toHaveBeenCalledWith(jasmine.objectContaining({name: "http.state"}), {pending: 1, done: 4});
         });
     });
 }

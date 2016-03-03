@@ -9,4 +9,5 @@
 /// <reference path="directives/codeeditor/WrapperDirective.ts"/>
 /// <reference path="directives/codeeditor/CodeEditorDirective.ts"/>
 /// <reference path="directives/endpointform/EndpointFormDirective.ts"/>
+/// <reference path="directives/progressbar/ProgressBarDirective.ts"/>
 /// <reference path="directives/common/CommonDirectives.ts"/>
